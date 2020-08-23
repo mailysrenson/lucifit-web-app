@@ -1,0 +1,4 @@
+<%= simple_form_for [ @course, @booking ] do |f| %>
+  <%= f.input :number_of_people, label:"Pour combien de personnes réserves-tu?", placeholder:"1" %>
+  <%= f.submit "Réserver", class: "btn btn-primary" %>
+<% end %>

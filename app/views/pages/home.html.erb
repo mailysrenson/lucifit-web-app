@@ -25,28 +25,7 @@
           <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year}" %></p>
           <p><%= "#{course.time.hour}:#{course.time.min}"%></p>
           <p>3 places restantes</p>
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Réserve ta place
-          </button>
-
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Réserve ta place</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <%= render template: "bookings/form" %>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <%= link_to "Réserve ton trampoline", new_course_booking_path(course), class:"btn btn-primary"%>
         </div>
       <% end %>
     <% end %>

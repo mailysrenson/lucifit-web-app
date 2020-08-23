@@ -1,1 +1,95 @@
 // Specific CSS for your home-page
+.banner {
+  margin-top: 0;
+  background-size: cover;
+  background-position: top;
+  padding: 180px 0;
+  height: 25vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#text-banner {
+  text-align: center;
+}
+
+.banner div {
+  text-align: center;
+}
+
+body {
+    color: #494949;
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: lighter;
+    font-family: 'Lora', serif;
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  color: white;
+  font-size: 38px;
+}
+
+.banner p {
+  font-style: italic;
+  font-weight: lighter;
+  opacity: 0.8;
+  color: white;
+  font-size: 30px;
+}
+
+#banner-button {
+  background: none;
+  border: 2px solid white;
+  padding: 13px 18px;
+  border-radius: 20px;
+  color: white;
+  font-weight: lighter;
+  font-size: 17px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+  color: #393e46;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+
+.container-home {
+    background-color: rgba(212, 138, 138, 0.404);
+    max-width: 700px;
+    margin: 20px auto;
+    border-radius: 4px;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 20px 10px;
+
+}
+
+.course-card {
+  background-color: white;
+  display: inline-block;
+  box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
+  padding: 5px 15px;
+  margin: 0 15px;
+}
+
+#contact-details p {
+  font-weight: lighter;
+}
+
+footer li{
+  display: inline-block;
+  margin: 0 10px;
+}
+
+footer {
+  text-align: center;
+}
+
+/* RESPONSIVITY */

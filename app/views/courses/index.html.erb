@@ -1,0 +1,68 @@
+<div class=" mt-5">    
+    <h2 class="text-center">Tous les cours</h2>
+    
+    <div class="container-home">
+      <h3>Cours cette semaine</h3>
+      <% if @this_week_courses.empty? %>
+        <h3>Pas de cours cette semaine</h3>
+      <% else %>
+        <% @this_week_courses.each do |course|%>
+          <div class="course-card col-4 mt-2">
+            <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
+            <hr>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year}" %></p>
+            <p><%= "#{course.time.hour}:#{course.time.min}"%></p>
+            <p>3 places restantes</p>
+            <%= link_to "Voir participants", course_path(course), class:"btn btn-primary mb-3"%>
+            <%= link_to "Supprimer cours", 
+            course_path(course),
+            method: :delete,
+            data: { confirm: "Etes-vous sûr de vouloir supprimer ce cours?" },
+            class:"btn btn-danger mb-3" %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="container-home">
+    <h3>Cours à venir</h3>
+      <% if @upcoming_courses.empty? %>
+        <h3>Pas de cours à venir</h3>
+      <% else %>
+        <% @upcoming_courses.each do |course|%>
+          <div class="course-card col-4 mt-2">
+            <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
+            <hr>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year}" %></p>
+            <p><%= "#{course.time.hour}:#{course.time.min}"%></p>
+            <p>3 places restantes</p>
+            <%= link_to "Voir participants", course_path(course), class:"btn btn-primary mb-3"%>
+            <%= link_to "Supprimer cours", 
+            course_path(course),
+            method: :delete,
+            data: { confirm: "Etes-vous sûr de vouloir supprimer ce cours?" },
+            class:"btn btn-danger mb-3" %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+
+    <div class="container-home">
+      <h3>Cours passés</h3>
+      <% if @passed_courses.empty? %>
+        <h3>Pas de cours passés</h3>
+      <% else %>
+        <% @passed_courses.each do |course|%>
+          <div class="course-card col-4 mt-2">
+            <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
+            <hr>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year}" %></p>
+            <p><%= "#{course.time.hour}:#{course.time.min}"%></p>
+            <p>3 places restantes</p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+</div>

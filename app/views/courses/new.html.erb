@@ -1,0 +1,14 @@
+<div class="container mt-5">
+  <div class="col-12 col-sm-8 col-md-4 offset-sm-2 offset-sm-4">
+    <div class="container">
+      <h2>Créer un cours</h2>
+      <%= simple_form_for(@course) do |f| %>
+        <%= f.input :address, label:"Adresse" %>
+        <%= f.input :date %>
+        <%= f.input :time, label:"Heure"%>
+        <%= f.input :number_of_places, label:"Nombre de places" %>
+        <%= f.button :submit,"Créer le cours", class:"btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

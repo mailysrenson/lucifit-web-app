@@ -24,8 +24,13 @@
           <hr>
           <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year}" %></p>
           <p><%= "#{course.time.hour}:#{course.time.min}"%></p>
-          <p>3 places restantes</p>
-          <%= link_to "Réserve ton trampoline", new_course_booking_path(course), class:"btn btn-primary"%>
+          <% if course.remaining_places > 0%>
+            <p>Il reste <%= course.remaining_places%> places</p>
+             <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2' %>
+          <% else %>
+            <p>Ce cours est complet</p>
+            <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2 disabled', disabled: true %>
+          <% end %>
         </div>
       <% end %>
     <% end %>
@@ -51,14 +56,11 @@
       n'hésitez pas à me contacter!
     </p>
     <div id="contact-details">
-      <p>Tél: </p>
+      <p>Tél: 0496 91 12 21</p>
       <p>Mail: </p>
     </div>
   </div>
 
 <footer>
-  <ul>
-    <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-    <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-  </ul>
+  <p><a href="https://www.facebook.com/LuciFit-110557990469320" target="_blank"><i class="fab fa-facebook"></i></a></p>
 </footer>

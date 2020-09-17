@@ -22,7 +22,10 @@ class CoursesController < ApplicationController
         @passed_courses << course 
       end
     end
+  end
 
+  def show
+    @course = Course.find(params[:id])
   end
   
   def new

@@ -1,4 +1,8 @@
-<%= simple_form_for [ @course, @booking ] do |f| %>
-  <%= f.input :number_of_people, label:"Pour combien de personnes réserves-tu?", placeholder:"1" %>
-  <%= f.submit "Réserver", class: "btn btn-primary" %>
-<% end %>
+<div class="container mt-5">
+  <div class="col-12 col-sm-8 col-md-4 offset-sm-2 offset-sm-4">
+    <%= simple_form_for(([@course, @booking]), remote: request.xhr?, html: { data: { modal: true } }) do |f| %>
+      <%= f.input :number_of_people, label:"Pour combien de personnes réserves-tu?", collection: 1..@course.remaining_places %>
+      <%= f.submit "Réserver", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

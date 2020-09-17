@@ -1,6 +1,9 @@
-<div class=" mt-5">    
-    <h2 class="text-center">Tous les cours</h2>
-    
+<div class=" mt-5">
+  <div class="container-home-white d-flex justify-content-between align-items-center">
+    <h2 class="text-left">Tous les cours</h2>
+    <%= link_to "Ajouter un cours", new_course_path, class:"btn btn-primary"%>
+  </div>
+
     <div class="container-home">
       <h3>Cours cette semaine</h3>
       <% if @this_week_courses.empty? %>
@@ -12,7 +15,16 @@
             <hr>
             <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year}" %></p>
             <p><%= "#{course.time.hour}:#{course.time.min}"%></p>
-            <p>3 places restantes</p>
+            <% sum = 0%>
+            <% if course.bookings.empty?%>
+              <p>Il reste <%= course.number_of_places%> places</p>
+            <% else %>
+              <% course.bookings.each do |booking| %>
+              <% sum += booking.number_of_people %>
+              <%end%>
+              <p>Il reste <%= course.number_of_places - sum %> place(s)</p>
+            <%end%>
+
             <%= link_to "Voir participants", course_path(course), class:"btn btn-primary mb-3"%>
             <%= link_to "Supprimer cours", 
             course_path(course),
@@ -35,7 +47,15 @@
             <hr>
             <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year}" %></p>
             <p><%= "#{course.time.hour}:#{course.time.min}"%></p>
-            <p>3 places restantes</p>
+            <% sum = 0%>
+            <% if course.bookings.empty?%>
+              <p>Il reste <%= course.number_of_places%> places</p>
+            <% else %>
+              <% course.bookings.each do |booking| %>
+              <% sum += booking.number_of_people %>
+              <%end%>
+              <p>Il reste <%= course.number_of_places - sum %> place(s)</p>
+            <%end%>
             <%= link_to "Voir participants", course_path(course), class:"btn btn-primary mb-3"%>
             <%= link_to "Supprimer cours", 
             course_path(course),
@@ -59,7 +79,16 @@
             <hr>
             <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year}" %></p>
             <p><%= "#{course.time.hour}:#{course.time.min}"%></p>
-            <p>3 places restantes</p>
+            <% sum = 0%>
+            <% if course.bookings.empty?%>
+              <p>Ce cours n'a pas été réservé</p>
+            <% else %>
+              <% course.bookings.each do |booking| %>
+              <% sum += booking.number_of_people %>
+              <%end%>
+              <p>Il y avait <%= sum %> participant(s)</p>
+            <%end%>
+            <%= link_to "Voir participants", course_path(course), class:"btn btn-primary mb-3"%>
           </div>
         <% end %>
       <% end %>

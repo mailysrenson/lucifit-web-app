@@ -1,1 +1,10 @@
-<h2>TEST</h2>
+<div class="container">
+  <h2 class="text-center mt-4"><%= "#{@course.address} - #{@course.date.day}/#{@course.date.month}/#{@course.date.year}"%></h2>
+  <h3 class="text-center">Liste des participants</h3>
+
+  <ul>
+    <% @course.bookings.each do |booking| %>
+      <li><%= "#{booking.user.first_name} #{booking.user.last_name} : #{booking.number_of_people} personne(s)"%></li>
+    <%end%>
+  </ul>
+</div>

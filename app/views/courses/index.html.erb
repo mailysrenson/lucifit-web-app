@@ -1,3 +1,4 @@
+<% if current_user.admin == true %>
 <div class=" mt-5">
   <div class="container-home-white d-flex justify-content-between align-items-center">
     <h2 class="text-left">Tous les cours</h2>
@@ -10,27 +11,26 @@
         <h3>Pas de cours cette semaine</h3>
       <% else %>
         <% @this_week_courses.each do |course|%>
-          <div class="course-card col-4 mt-2">
+          <div class="course-card col-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
-            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year}" %></p>
-            <p><%= "#{course.time.hour}:#{course.time.min}"%></p>
-            <% sum = 0%>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{course.time.min}" %></p>
             <% if course.bookings.empty?%>
               <p>Il reste <%= course.number_of_places%> places</p>
+            <% elsif course.remaining_places == 0 %>
+            <p>Le cours est complet <%= ["💪","🎉","👯‍♀️", "🤩","🥳"].sample %></p>
             <% else %>
-              <% course.bookings.each do |booking| %>
-              <% sum += booking.number_of_people %>
-              <%end%>
-              <p>Il reste <%= course.number_of_places - sum %> place(s)</p>
-            <%end%>
-
-            <%= link_to "Voir participants", course_path(course), class:"btn btn-primary mb-3"%>
-            <%= link_to "Supprimer cours", 
-            course_path(course),
+              <p>Il reste <%= course.remaining_places %> place(s)</p>
+            <% end %>
+            <%= link_to course_path(course), class:"btn btn-outline-primary mb-3" do %>
+              <i class="fas fa-users"></i>
+            <% end %>
+            <%= link_to course_path(course),
             method: :delete,
             data: { confirm: "Etes-vous sûr de vouloir supprimer ce cours?" },
-            class:"btn btn-danger mb-3" %>
+            class:"btn btn-outline-primary mb-3" do %>
+              <i class="far fa-trash-alt"></i>
+            <% end %>
           </div>
         <% end %>
       <% end %>
@@ -42,26 +42,26 @@
         <h3>Pas de cours à venir</h3>
       <% else %>
         <% @upcoming_courses.each do |course|%>
-          <div class="course-card col-4 mt-2">
+          <div class="course-card col-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
-            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year}" %></p>
-            <p><%= "#{course.time.hour}:#{course.time.min}"%></p>
-            <% sum = 0%>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{course.time.min}" %></p>
             <% if course.bookings.empty?%>
               <p>Il reste <%= course.number_of_places%> places</p>
+            <% elsif course.remaining_places == 0 %>
+            <p>Le cours est complet <%= ["💪","🎉","👯‍♀️", "🤩","🥳"].sample %></p>
             <% else %>
-              <% course.bookings.each do |booking| %>
-              <% sum += booking.number_of_people %>
-              <%end%>
-              <p>Il reste <%= course.number_of_places - sum %> place(s)</p>
-            <%end%>
-            <%= link_to "Voir participants", course_path(course), class:"btn btn-primary mb-3"%>
-            <%= link_to "Supprimer cours", 
-            course_path(course),
+              <p>Il reste <%= course.remaining_places %> place(s)</p>
+            <% end %>
+            <%= link_to course_path(course), class:"btn btn-outline-primary mb-3" do %>
+              <i class="fas fa-users"></i>
+            <% end %>
+            <%= link_to course_path(course),
             method: :delete,
             data: { confirm: "Etes-vous sûr de vouloir supprimer ce cours?" },
-            class:"btn btn-danger mb-3" %>
+            class:"btn btn-outline-primary mb-3" do %>
+              <i class="far fa-trash-alt"></i>
+            <% end %>
           </div>
         <% end %>
       <% end %>
@@ -74,24 +74,73 @@
         <h3>Pas de cours passés</h3>
       <% else %>
         <% @passed_courses.each do |course|%>
-          <div class="course-card col-4 mt-2">
+          <div class="course-card col-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
-            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year}" %></p>
-            <p><%= "#{course.time.hour}:#{course.time.min}"%></p>
-            <% sum = 0%>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{course.time.min}" %></p>
             <% if course.bookings.empty?%>
-              <p>Ce cours n'a pas été réservé</p>
+              <p>Il reste <%= course.number_of_places%> places</p>
+            <% elsif course.remaining_places == 0 %>
+            <p>Le cours était complet <%= ["💪","🎉","👯‍♀️", "🤩","🥳"].sample %></p>
             <% else %>
-              <% course.bookings.each do |booking| %>
-              <% sum += booking.number_of_people %>
-              <%end%>
-              <p>Il y avait <%= sum %> participant(s)</p>
-            <%end%>
-            <%= link_to "Voir participants", course_path(course), class:"btn btn-primary mb-3"%>
+              <p>Il restait <%= course.remaining_places %> place(s)</p>
+            <% end %>
+            <%= link_to course_path(course), class:"btn btn-outline-primary mb-3" do %>
+              <i class="fas fa-users"></i>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+</div>
+<% else %>
+  <div class="container-home">
+      <h3>Cours cette semaine</h3>
+      <% if @this_week_courses.empty? %>
+        <h3>Pas de cours cette semaine</h3>
+      <% else %>
+        <% @this_week_courses.each do |course|%>
+          <div class="course-card col-4 mt-3">
+            <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
+            <hr>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{course.time.min}" %></p>
+            <% if course.bookings.empty?%>
+              <p>Il reste <%= course.number_of_places%> places</p>
+              <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2' %>
+            <% elsif course.remaining_places == 0 %>
+              <p>Ce cours est complet</p>
+              <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2 disabled', disabled: true %>
+            <% else %>
+              <p>Il reste <%= course.remaining_places %> place(s)</p>
+              <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2' %>
+            <% end %>            
           </div>
         <% end %>
       <% end %>
     </div>
 
-</div>
+    <div class="container-home">
+    <h3>Cours à venir</h3>
+      <% if @upcoming_courses.empty? %>
+        <h3>Pas de cours à venir</h3>
+      <% else %>
+        <% @upcoming_courses.each do |course|%>
+          <div class="course-card col-4 mt-3">
+            <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
+            <hr>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{course.time.min}" %></p>
+            <% if course.bookings.empty?%>
+              <p>Il reste <%= course.number_of_places%> places</p>
+              <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2' %>
+            <% elsif course.remaining_places == 0 %>
+              <p>Ce cours est complet</p>
+              <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2 disabled', disabled: true %>
+            <% else %>
+              <p>Il reste <%= course.remaining_places %> place(s)</p>
+              <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2' %>
+            <% end %>            
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+<% end %>

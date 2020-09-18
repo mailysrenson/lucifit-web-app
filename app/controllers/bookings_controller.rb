@@ -31,6 +31,15 @@ class BookingsController < ApplicationController
     @bookings = current_user.bookings
   end
 
+  def destroy
+    @booking = Booking.find(params[:id])
+    @course = @booking.course
+    @course.remaining_places += @booking.number_of_people
+    @course.save
+    @booking.destroy
+    redirect_to course_path(@course)
+  end
+
   private 
 
   def booking_params 

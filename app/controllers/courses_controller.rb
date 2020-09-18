@@ -2,26 +2,29 @@ class CoursesController < ApplicationController
   def index
     @courses = Course.all
     @booking = Booking.new
-    @this_week_courses = []
-    @this_week_courses = @courses.select do |course|
+    @this_week_courses_unsorted = []
+    @this_week_courses_unsorted = @courses.select do |course|
       if course.date.cweek == Date.today.cweek
-        @this_week_courses << course 
+        @this_week_courses_unsorted << course 
       end
     end
+    @this_week_courses = @this_week_courses_unsorted.sort_by {|course| course.date}
 
-    @upcoming_courses = []
-    @upcoming_courses = @courses.select do |course|
+    @upcoming_courses_unsorted = []
+    @upcoming_courses_unsorted = @courses.select do |course|
       if course.date.cweek > Date.today.cweek
-        @upcoming_courses << course 
+        @upcoming_courses_unsorted << course 
       end
+    @upcoming_courses = @upcoming_courses_unsorted.sort_by {|course| course.date}
     end
 
-    @passed_courses = []
-    @passed_courses = @courses.select do |course|
+    @passed_courses_unsorted = []
+    @passed_courses_unsorted = @courses.select do |course|
       if course.date.cweek < Date.today.cweek
-        @passed_courses << course 
+        @passed_courses_unsorted << course 
       end
     end
+    @passed_courses = @passed_courses_unsorted.sort_by {|course| course.date}
   end
 
   def show
@@ -52,6 +55,6 @@ class CoursesController < ApplicationController
   private 
 
   def course_params 
-    params.require(:course).permit(:address, :date, :time, :number_of_places)
+    params.require(:course).permit(:address, :date, :time, :number_of_places, :remaining_places)
   end
 end

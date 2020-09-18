@@ -19,26 +19,34 @@
       <h3>Pas de cours cette semaine</h3>
     <% else %>
       <% @weekly_courses.each do |course|%>
-        <div class="course-card col-4 mt-2">
-          <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
-          <hr>
-          <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year}" %></p>
-          <p><%= "#{course.time.hour}:#{course.time.min}"%></p>
-          <% if course.remaining_places > 0%>
-            <p>Il reste <%= course.remaining_places%> places</p>
-             <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2' %>
-          <% else %>
-            <p>Ce cours est complet</p>
-            <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2 disabled', disabled: true %>
-          <% end %>
-        </div>
+        <% if course.date > Date.today %>
+          <div class="course-card col-4 mt-3">
+            <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
+            <hr>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{course.time.min}"%></p>
+            <% if course.remaining_places > 0 %>
+              <p>Il reste <%= course.remaining_places%> places</p>
+              <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2' %>
+            <% else %>
+              <p class="text-primary font-weight-bold">Ce cours est complet</p>
+              <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2 disabled', disabled: true %>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="course-card col-4 mt-3">
+            <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
+            <hr>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{course.time.min}"%></p>
+            <p class="text-primary font-weight-bold">Ce cours est déjà passé</p>
+          </div>
+        <%end%>
       <% end %>
     <% end %>
   </div>
 
   <div class="container-home">
     <h2>Qui suis-je?</h2>
-    <p>Je m'appelle Lucie Mathieu et j'habite à Ohey.
+    <p> Je m'appelle Lucie Mathieu et j'habite à Ohey.
       Il y a quelques années, j'ai suivi un cours de trampoline
       et je suis tombée amoureuse de ce sport. Je voulais partager
       cette nouvelle passion avec d'autres personnes, c'est pourquoi

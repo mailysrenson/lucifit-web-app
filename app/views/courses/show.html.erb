@@ -2,9 +2,32 @@
   <h2 class="text-center mt-4"><%= "#{@course.address} - #{@course.date.day}/#{@course.date.month}/#{@course.date.year}"%></h2>
   <h3 class="text-center">Liste des participants</h3>
 
-  <ul>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Email</th>
+        <th scope="col">Nombre de personnes</th>
+        <th>Supprimer</th>   
+      </tr>  
+    </thead>
+
+
     <% @course.bookings.each do |booking| %>
-      <li><%= "#{booking.user.first_name} #{booking.user.last_name} : #{booking.number_of_people} personne(s)"%></li>
+      <tr>
+        <td><%= booking.user.first_name %></td>
+        <td><%= booking.user.last_name %></td>
+        <td><%= booking.user.email %></td>
+        <td><%= booking.number_of_people %></td>
+        <td>
+            <%= link_to booking_path(booking),
+            method: :delete,
+            data: { confirm: "Etes-vous sûr de vouloir supprimer cette réservation?" } do %>
+              <i class="far fa-trash-alt"></i>
+            <% end %>
+        </td>
+      </tr>
     <%end%>
-  </ul>
+  </table>
 </div>

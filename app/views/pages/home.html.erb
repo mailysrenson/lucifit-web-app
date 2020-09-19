@@ -19,11 +19,17 @@
       <h3>Pas de cours cette semaine</h3>
     <% else %>
       <% @weekly_courses.each do |course|%>
-        <% if course.date > Date.today %>
+        <% if course.date >= Date.today %>
           <div class="course-card col-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
-            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{course.time.min}"%></p>
+            <% minutes = course.time.min %>
+            <% if minutes < 10 %>
+              <% min = "0" + minutes.to_s %>
+            <% else %>
+              <% min = minutes%>
+            <% end %>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{min}"%></p>
             <% if course.remaining_places > 0 %>
               <p>Il reste <%= course.remaining_places%> places</p>
               <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2' %>
@@ -36,12 +42,21 @@
           <div class="course-card col-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
-            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{course.time.min}"%></p>
+            <% minutes = course.time.min %>
+            <% if minutes < 10 %>
+              <% min = "0" + minutes.to_s %>
+            <% else %>
+              <% min = minutes%>
+            <% end %>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{min}"%></p>
             <p class="text-primary font-weight-bold">Ce cours est déjà passé</p>
           </div>
         <%end%>
       <% end %>
     <% end %>
+    <div class="link-extra-courses">
+      <%= link_to "Voir tous les cours planifiés", courses_path %>
+    </div>
   </div>
 
   <div class="container-home">
@@ -64,11 +79,12 @@
       n'hésitez pas à me contacter!
     </p>
     <div id="contact-details">
-      <p>Tél: 0496 91 12 21</p>
-      <p>Mail: </p>
+      <p><i class="fas fa-mobile"></i> 0496 91 12 21</p>
+      <p><i class="fas fa-envelope"></i> lucie.mathieu93@hotmail.com</p>
     </div>
   </div>
 
 <footer>
+  <h4>Suivez-moi sur Facebook:</h4>
   <p><a href="https://www.facebook.com/LuciFit-110557990469320" target="_blank"><i class="fab fa-facebook"></i></a></p>
 </footer>

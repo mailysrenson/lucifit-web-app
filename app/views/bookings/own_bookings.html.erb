@@ -1,12 +1,17 @@
 <div class="container">
   <h2 class="text-center mt-5">Mes réservations à venir</h2>
   <div class="container-home">
-    <% @bookings.each do |booking| %>
+    <% @upcoming_bookings.each do |booking| %>
     <div class="course-card col-4 mt-2">
       <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= booking.course.address%></h5>
       <hr>
-      <p><%= "#{booking.course.date.day}/#{booking.course.date.month}/#{booking.course.date.year}" %></p>
-      <p><%= "#{booking.course.time.hour}:#{booking.course.time.min}"%></p>
+      <% minutes = booking.course.time.min %>
+      <% if minutes < 10 %>
+        <% min = "0" + minutes.to_s %>
+      <% else %>
+        <% min = minutes%>
+      <% end %>
+      <p><%= "#{booking.course.date.day}/#{booking.course.date.month}/#{booking.course.date.year} - #{booking.course.time.hour}:#{min}" %></p>
       <p><%= "Réservation pour #{booking.number_of_people} personne(s)"%></p>
     </div>
     <% end %>  

@@ -29,6 +29,9 @@ class BookingsController < ApplicationController
 
   def own_bookings
     @bookings = current_user.bookings
+    @upcoming_bookings = @bookings.select do |booking|
+      booking.course.date >= Date.today
+    end
   end
 
   def destroy

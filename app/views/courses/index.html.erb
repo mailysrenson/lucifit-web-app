@@ -14,7 +14,13 @@
           <div class="course-card col-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
-            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{course.time.min}" %></p>
+            <% minutes = course.time.min %>
+            <% if minutes < 10 %>
+              <% min = "0" + minutes.to_s %>
+            <% else %>
+              <% min = minutes%>
+            <% end %>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{min}" %></p>
             <% if course.bookings.empty?%>
               <p>Il reste <%= course.number_of_places%> places</p>
             <% elsif course.remaining_places == 0 %>
@@ -45,7 +51,13 @@
           <div class="course-card col-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
-            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{course.time.min}" %></p>
+            <% minutes = course.time.min %>
+            <% if minutes < 10 %>
+              <% min = "0" + minutes.to_s %>
+            <% else %>
+              <% min = minutes%>
+            <% end %>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{min}" %></p>
             <% if course.bookings.empty?%>
               <p>Il reste <%= course.number_of_places%> places</p>
             <% elsif course.remaining_places == 0 %>
@@ -77,7 +89,13 @@
           <div class="course-card col-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
-            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{course.time.min}" %></p>
+            <% minutes = course.time.min %>
+            <% if minutes < 10 %>
+              <% min = "0" + minutes.to_s %>
+            <% else %>
+              <% min = minutes%>
+            <% end %>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{min}" %></p>
             <% if course.bookings.empty?%>
               <p>Il reste <%= course.number_of_places%> places</p>
             <% elsif course.remaining_places == 0 %>
@@ -103,7 +121,13 @@
           <div class="course-card col-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
-            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{course.time.min}" %></p>
+            <% minutes = course.time.min %>
+            <% if minutes < 10 %>
+              <% min = "0" + minutes.to_s %>
+            <% else %>
+              <% min = minutes%>
+            <% end %>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{min}" %></p>
             <% if course.bookings.empty?%>
               <p>Il reste <%= course.number_of_places%> places</p>
               <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2' %>
@@ -128,7 +152,13 @@
           <div class="course-card col-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
-            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{course.time.min}" %></p>
+            <% minutes = course.time.min %>
+            <% if minutes < 10 %>
+              <% min = "0" + minutes.to_s %>
+            <% else %>
+              <% min = minutes%>
+            <% end %>
+            <p><%= "#{course.date.day}/#{course.date.month}/#{course.date.year} - #{course.time.hour}:#{min}" %></p>
             <% if course.bookings.empty?%>
               <p>Il reste <%= course.number_of_places%> places</p>
               <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2' %>

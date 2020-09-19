@@ -19,10 +19,12 @@
    <title>Lucifit</title>
   </head>
 
-  <body>
-      <%= render 'shared/navbar'%>
-      <%= render 'shared/flashes' %>
-      <div id="modal-holder"></div>
-    <%= yield %>
+  <body class="bg-white">
+    <div>
+    <%= render 'shared/navbar'%>
+    <%= render 'shared/flashes' %>
+    <div id="modal-holder"></div>
+    <%= yield %>    
+    </div>
   </body>
 </html>

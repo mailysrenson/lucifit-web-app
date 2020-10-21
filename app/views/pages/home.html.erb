@@ -6,8 +6,8 @@
   </div>
 
   <div id="description" class="container-home">
-    <h2>Envie de découvrir un sport qui va enfin te motiver à te bouger tout en t'amusant?</h2>
-    <p>Lucifit te prépare chaque semaine un cours de trampoline
+    <h2>Envie de découvrir un sport qui va enfin vous motiver à vous bouger tout en vous amusant?</h2>
+    <p>Lucifit vous prépare chaque semaine un cours de trampoline
       Groupe de 10 personnes max, chaque cours dure 1h.
       L'opportunité parfaite pour vous défouler tout en brûlant des calories
     </p>
@@ -20,7 +20,7 @@
     <% else %>
       <% @weekly_courses.each do |course|%>
         <% if course.date >= Date.today %>
-          <div class="course-card col-4 mt-3">
+          <div class="course-card col-10 col-lg-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
             <% minutes = course.time.min %>
@@ -39,7 +39,7 @@
             <% end %>
           </div>
         <% else %>
-          <div class="course-card col-4 mt-3">
+          <div class="course-card col-10 col-lg-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
             <% minutes = course.time.min %>

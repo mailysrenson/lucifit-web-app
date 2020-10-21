@@ -9,7 +9,7 @@
     <h2>Envie de découvrir un sport qui va enfin vous motiver à vous bouger tout en vous amusant?</h2>
     <p>Lucifit vous prépare chaque semaine un cours de trampoline
       Groupe de 10 personnes max, chaque cours dure 1h.
-      L'opportunité parfaite pour vous défouler tout en brûlant des calories
+      L'opportunité parfaite pour vous défouler tout en brûlant des calories.
     </p>
   </div>
 
@@ -33,6 +33,7 @@
             <% if course.remaining_places > 0 %>
               <p>Il reste <%= course.remaining_places%> places</p>
               <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2' %>
+              <p><em>Prix: 10€</em></p>
             <% else %>
               <p class="text-primary font-weight-bold">Ce cours est complet</p>
               <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2 disabled', disabled: true %>

@@ -11,7 +11,7 @@
         <h3>Pas de cours cette semaine</h3>
       <% else %>
         <% @this_week_courses.each do |course|%>
-          <div class="course-card col-4 mt-3">
+          <div class="course-card col-10 col-lg-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
             <% minutes = course.time.min %>
@@ -48,7 +48,7 @@
         <h3>Pas de cours à venir</h3>
       <% else %>
         <% @upcoming_courses.each do |course|%>
-          <div class="course-card col-4 mt-3">
+          <div class="course-card col-10 col-lg-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
             <% minutes = course.time.min %>
@@ -86,7 +86,7 @@
         <h3>Pas de cours passés</h3>
       <% else %>
         <% @passed_courses.each do |course|%>
-          <div class="course-card col-4 mt-3">
+          <div class="course-card col-10 col-lg-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
             <% minutes = course.time.min %>
@@ -118,7 +118,7 @@
         <h3>Pas de cours cette semaine</h3>
       <% else %>
         <% @this_week_courses.each do |course|%>
-          <div class="course-card col-4 mt-3">
+          <div class="course-card col-10 col-lg-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
             <% minutes = course.time.min %>
@@ -131,12 +131,15 @@
             <% if course.bookings.empty?%>
               <p>Il reste <%= course.number_of_places%> places</p>
               <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2' %>
+              <p><em>Prix: 10€</em></p>
             <% elsif course.remaining_places == 0 %>
               <p>Ce cours est complet</p>
               <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2 disabled', disabled: true %>
+              <p><em>Prix: 10€</em></p>
             <% else %>
               <p>Il reste <%= course.remaining_places %> place(s)</p>
               <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2' %>
+              <p><em>Prix: 10€</em></p>
             <% end %>            
           </div>
         <% end %>
@@ -149,7 +152,7 @@
         <h3>Pas de cours à venir</h3>
       <% else %>
         <% @upcoming_courses.each do |course|%>
-          <div class="course-card col-4 mt-3">
+          <div class="course-card col-10 col-lg-4 mt-3">
             <h5 class="pt-3"><i class="fas fa-map-marker-alt"></i> <%= course.address%></h5>
             <hr>
             <% minutes = course.time.min %>
@@ -162,12 +165,15 @@
             <% if course.bookings.empty?%>
               <p>Il reste <%= course.number_of_places%> places</p>
               <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2' %>
+              <p><em>Prix: 10€</em></p>
             <% elsif course.remaining_places == 0 %>
               <p>Ce cours est complet</p>
               <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2 disabled', disabled: true %>
+              <p><em>Prix: 10€</em></p>
             <% else %>
               <p>Il reste <%= course.remaining_places %> place(s)</p>
               <%= link_to 'Réserver', new_course_booking_path(course), class: 'btn btn-primary mb-2' %>
+              <p><em>Prix: 10€</em></p>
             <% end %>            
           </div>
         <% end %>
